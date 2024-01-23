@@ -24,7 +24,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>
  *
  */
-\OC_JSON::checkAppEnabled('files_external');
+\OC_JSON::checkAppEnabled('files_external1');
 \OC_JSON::callCheck();
 
 \OC_JSON::checkAdminUser();

@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.3",
     "info": {
-        "title": "files_external",
+        "title": "files_external1",
         "version": "0.0.1",
         "description": "Adds basic external storage support",
         "license": {

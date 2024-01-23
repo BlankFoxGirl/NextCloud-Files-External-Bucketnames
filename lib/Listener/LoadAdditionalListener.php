@@ -49,7 +49,7 @@ class LoadAdditionalListener implements IEventListener {
 			return;
 		}
 
-		$allowUserMounting = $this->config->getAppValue('files_external', 'allow_user_mounting', 'no') === 'yes';
+		$allowUserMounting = $this->config->getAppValue('files_external1', 'allow_user_mounting', 'no') === 'yes';
 		$this->initialState->provideInitialState('allowUserMounting', $allowUserMounting);
 
 		Util::addInitScript(Application::APP_ID, 'init');

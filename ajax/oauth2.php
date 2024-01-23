@@ -22,7 +22,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>
  *
  */
-\OC_JSON::checkAppEnabled('files_external');
+\OC_JSON::checkAppEnabled('files_external1');
 \OC_JSON::checkLoggedIn();
 \OC_JSON::callCheck();
 $l = \OC::$server->getL10N('files_external');

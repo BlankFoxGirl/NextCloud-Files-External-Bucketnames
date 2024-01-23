@@ -80,7 +80,7 @@ require_once __DIR__ . '/../../3rdparty/autoload.php';
  * @package OCA\Files_External1\AppInfo
  */
 class Application extends App implements IBackendProvider, IAuthMechanismProvider, IBootstrap {
-	public const APP_ID = 'files_external';
+	public const APP_ID = 'files_external1';
 
 	/**
 	 * Application constructor.

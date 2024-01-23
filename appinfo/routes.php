@@ -28,13 +28,13 @@
  */
 
 
-$this->create('files_external_oauth1', 'apps/files_external1/ajax/oauth1.php')
+$this->create('files_external1_oauth1', 'apps/files_external1/ajax/oauth1.php')
 	->actionInclude('files_external1/ajax/oauth1.php');
-$this->create('files_external_oauth2', 'apps/files_external1/ajax/oauth2.php')
+$this->create('files_external1_oauth2', 'apps/files_external1/ajax/oauth2.php')
 	->actionInclude('files_external1/ajax/oauth2.php');
 
 
-$this->create('files_external_list_applicable', '/apps/files_external1/applicable')
+$this->create('files_external1_list_applicable', '/apps/files_external1/applicable')
 	->actionInclude('files_external1/ajax/applicable.php');
 
 return [

@@ -72,7 +72,7 @@ class Admin implements ISettings {
 			'globalCredentialsUid' => '',
 		];
 
-		return new TemplateResponse('files_external', 'settings', $parameters, '');
+		return new TemplateResponse('files_external1', 'settings', $parameters, '');
 	}
 
 	/**
