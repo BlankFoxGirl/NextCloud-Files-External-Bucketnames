@@ -84,6 +84,23 @@
 }
 
 #externalStorage td.configuration {
+	&:has(input.expander:checked) {
+		& > div.expander-content {
+			display: block;
+		}
+		& > label::before {
+			display: none;
+		}
+	}
+
+	&:has(input.expander) {
+		&> label::before {
+			content: 'Show';
+		}
+		&> div.expander-content {
+			display: none;
+		}
+	}
 	&> label > input.expander:checked ~ div.expander-content {
 		display: block;
 	}
