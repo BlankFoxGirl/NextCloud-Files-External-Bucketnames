@@ -90,8 +90,11 @@
 	&> input.expander ~ div.expander-content {
 		display: none;
 	}
-	&> input.expander:not(:checked) ~ label[data-expander]::before {
-		content: 'Config';
+	&> input.expander:checked ~ label[data-expander]::before {
+		display: none;
+	}
+	&> label[data-expander]::before {
+		content: 'Configure';
 	}
 }
 

@@ -7,3 +7,11 @@ td.configuration.expander > input.expander:checked ~ div.expander-content {
 td.configuration.expander > input.expander:not(:checked) ~ label[data-expander]::before {
     content: 'Config';
 }
+
+td.configuration.expander > input.expander:checked ~ label[data-expander]::before {
+    display: none;
+}
+
+td.configuration.expander > input.expander ~ div.expander-content {
+    display: none;
+}
