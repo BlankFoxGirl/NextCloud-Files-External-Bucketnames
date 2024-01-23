@@ -83,6 +83,18 @@
 	white-space: nowrap;
 }
 
+#externalStorage td.configuration {
+	&> input.expander:checked ~ div.expander-content {
+		display: block;
+	}
+	&> input.expander ~ div.expander-content {
+		display: none;
+	}
+	&> input.expander:not(:checked) ~ label[data-expander]::before {
+		content: 'Config';
+	}
+}
+
 #externalStorage td.configuration input.added  {
 	margin-right: 6px;
 }

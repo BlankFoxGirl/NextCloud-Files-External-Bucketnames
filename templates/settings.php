@@ -168,7 +168,7 @@ uasort($sortedBackends, function ($a, $b) {
 					</select>
 				</td>
 				<td class="authentication" data-mechanisms='<?php p(json_encode($_['authMechanisms'])); ?>'></td>
-				<td class="configuration"></td>
+				<td class="configuration expander"><label><input type="checkbox" class="expander hidden" /></label><div class="expander-content"></div></td>
 				<?php if ($_['visibilityType'] === BackendService::VISIBILITY_ADMIN): ?>
 					<td class="applicable" align="right">
 						<label><input type="checkbox" class="applicableToAllUsers" checked="" /><?php p($l->t('All users')); ?></label>

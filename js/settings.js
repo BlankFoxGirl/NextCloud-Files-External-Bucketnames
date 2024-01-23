@@ -813,7 +813,7 @@ MountConfigListView.prototype = _.extend({
 	 */
 	configureAuthMechanism: function($tr, authMechanism, onCompletion) {
 		var authMechanismConfiguration = this._allAuthMechanisms[authMechanism];
-		var $td = $tr.find('td.configuration');
+		var $td = $tr.find('td.configuration>div');
 		$td.find('.auth-param').remove();
 
 		$.each(authMechanismConfiguration['configuration'], _.partial(
