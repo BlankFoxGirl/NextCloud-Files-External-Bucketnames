@@ -84,13 +84,13 @@
 }
 
 #externalStorage td.configuration {
-	&> input.expander:checked ~ div.expander-content {
+	&> label > input.expander:checked ~ div.expander-content {
 		display: block;
 	}
-	&> input.expander ~ div.expander-content {
+	&> label > input.expander ~ div.expander-content {
 		display: none;
 	}
-	&> input.expander:checked ~ label[data-expander]::before {
+	&> label > input.expander:checked ~ label[data-expander]::before {
 		display: none;
 	}
 	&> label[data-expander]::before {
