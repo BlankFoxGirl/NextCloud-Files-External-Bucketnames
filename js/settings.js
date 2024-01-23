@@ -775,7 +775,7 @@ MountConfigListView.prototype = _.extend({
 		$tr.find('.applicableToAllUsers').prop('checked', false).trigger('change');
 		onCompletion.resolve();
 
-		$tr.find('td.configuration').children().not('[type=hidden]').first().focus();
+		$tr.find('td.configuration>div').children().not('[type=hidden]').first().focus();
 		this.saveStorageConfig($tr);
 	},
 
@@ -899,7 +899,7 @@ MountConfigListView.prototype = _.extend({
 		}
 		$tr.find('td.authentication').append(selectAuthMechanism);
 
-		var $td = $tr.find('td.configuration');
+		var $td = $tr.find('td.configuration>div');
 		$.each(backend.configuration, _.partial(this.writeParameterInput, $td).bind(this));
 
 		this.trigger('selectBackend', $tr, backend.identifier, onCompletion);
