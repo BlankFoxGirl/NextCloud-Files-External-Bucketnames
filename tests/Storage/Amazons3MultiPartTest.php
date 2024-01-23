@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-namespace OCA\files_external\tests\Storage;
+namespace OCA\Files_External1\tests\Storage;
 
 use OCA\Files_External1\Lib\Storage\AmazonS3;
 

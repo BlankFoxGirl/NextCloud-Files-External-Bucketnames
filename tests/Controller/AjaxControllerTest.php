@@ -50,10 +50,10 @@ class AjaxControllerTest extends TestCase {
 
 	protected function setUp(): void {
 		$this->request = $this->createMock(IRequest::class);
-		$this->rsa = $this->getMockBuilder('\\OCA\\Files_External\\Lib\\Auth\\PublicKey\\RSA')
+		$this->rsa = $this->getMockBuilder('\\OCA\\Files_External1\\Lib\\Auth\\PublicKey\\RSA')
 			->disableOriginalConstructor()
 			->getMock();
-		$this->globalAuth = $this->getMockBuilder('\\OCA\\Files_External\\Lib\\Auth\\Password\GlobalAuth')
+		$this->globalAuth = $this->getMockBuilder('\\OCA\\Files_External1\\Lib\\Auth\\Password\GlobalAuth')
 			->disableOriginalConstructor()
 			->getMock();
 		$this->userSession = $this->createMock(IUserSession::class);

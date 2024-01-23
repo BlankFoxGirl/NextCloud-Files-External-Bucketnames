@@ -3,11 +3,11 @@
         "vendor-dir": ".",
         "optimize-autoloader": true,
         "classmap-authoritative": true,
-        "autoloader-suffix": "Files_External"
+        "autoloader-suffix": "Files_External1"
     },
     "autoload" : {
         "psr-4": {
-            "OCA\\Files_External\\": "../lib/"
+            "OCA\\Files_External1\\": "../lib/"
         }
     }
 }

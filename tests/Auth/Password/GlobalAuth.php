@@ -25,7 +25,7 @@
 namespace OCA\Files_External1\Tests\Auth\Password;
 
 use OCA\Files_External1\Lib\Auth\Password\GlobalAuth;
-use OCA\Files_external\Lib\StorageConfig;
+use OCA\Files_External1\Lib\StorageConfig;
 use OCP\IL10N;
 use OCP\Security\ICredentialsManager;
 use Test\TestCase;

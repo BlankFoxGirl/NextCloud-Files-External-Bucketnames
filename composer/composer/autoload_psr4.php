@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = $vendorDir;
 
 return array(
-    'OCA\\Files_External\\' => array($baseDir . '/../lib'),
+    'OCA\\Files_External1\\' => array($baseDir . '/../lib'),
 );
