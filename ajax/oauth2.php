@@ -25,6 +25,6 @@
 \OC_JSON::checkAppEnabled('files_external1');
 \OC_JSON::checkLoggedIn();
 \OC_JSON::callCheck();
-$l = \OC::$server->getL10N('files_external');
+$l = \OC::$server->getL10N('files_external1');
 
 // TODO: implement redirect to which storage backend requested this
