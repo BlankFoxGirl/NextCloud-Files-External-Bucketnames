@@ -101,12 +101,12 @@ class AdminTest extends TestCase {
 			'globalCredentials' => 'asdf:asdf',
 			'globalCredentialsUid' => '',
 		];
-		$expected = new TemplateResponse('files_external', 'settings', $params, '');
+		$expected = new TemplateResponse('files_external1', 'settings', $params, '');
 		$this->assertEquals($expected, $this->admin->getForm());
 	}
 
 	public function testGetSection() {
-		$this->assertSame('externalstorages', $this->admin->getSection());
+		$this->assertSame('externalstorages1', $this->admin->getSection());
 	}
 
 	public function testGetPriority() {

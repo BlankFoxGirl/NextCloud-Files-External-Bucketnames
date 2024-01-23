@@ -50,7 +50,7 @@ class SectionTest extends TestCase {
 	}
 
 	public function testGetID() {
-		$this->assertSame('externalstorages', $this->section->getID());
+		$this->assertSame('externalstorages1', $this->section->getID());
 	}
 
 	public function testGetName() {

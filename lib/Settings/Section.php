@@ -50,7 +50,7 @@ class Section implements IIconSection {
 	 * @returns string
 	 */
 	public function getID() {
-		return 'externalstorages';
+		return 'externalstorages1';
 	}
 
 	/**

@@ -50,7 +50,7 @@ export const action = new FileAction({
 				(redirect) => {
 					if (redirect === true) {
 						const scope = node.attributes.scope === 'personal' ? 'user' : 'admin'
-						window.location.href = generateUrl(`/settings/${scope}/externalstorages`)
+						window.location.href = generateUrl(`/settings/${scope}/externalstorages1`)
 					}
 				},
 			)
