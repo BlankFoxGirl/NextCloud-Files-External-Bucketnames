@@ -53,7 +53,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 				$classes[] = 'optional';
 			} ?>
 			<input type="password"
-				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="<?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 				value="<?php p($value); ?>"
 				placeholder="<?php p($placeholder); ?>"
@@ -66,7 +66,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 			<label>
 			<input type="checkbox"
 				id="<?php p($checkboxId); ?>"
-				<?php if (!empty($classes)): ?> class="checkbox <?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="checkbox <?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 				<?php if ($value === true): ?> checked="checked"<?php endif; ?>
 			/>
@@ -77,7 +77,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 			break;
 		case DefinitionParameter::VALUE_HIDDEN: ?>
 			<input type="hidden"
-				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="<?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 				value="<?php p($value); ?>"
 			/>
@@ -88,7 +88,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 				$classes[] = 'optional';
 			} ?>
 			<select
-				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="<?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 			>
 				<?php foreach ($parameter->getOptions() as $optionValue => $optionText): ?>
@@ -106,7 +106,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 				$classes[] = 'optional';
 			} ?>
 			<input type="text"
-				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="<?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 				value="<?php p($value); ?>"
 				placeholder="<?php p($placeholder); ?>"
