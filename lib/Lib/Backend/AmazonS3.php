@@ -48,8 +48,8 @@ class AmazonS3 extends Backend
                 (new DefinitionParameter('name', $l->t('Name')))
                     ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
                 (new DefinitionParameter('acl', $l->t('Acl')))
-                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL)
                     ->setType(DefinitionParameter::VALUE_SELECT)
+                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL)
                     ->setOptions([
                         ''                          => $l->t('None'),
                         'private'                   => $l->t('Private'),
@@ -58,7 +58,8 @@ class AmazonS3 extends Backend
                         'authenticated-read'        => $l->t('Authenticated Read'),
                         'bucket-owner-read'         => $l->t('Bucket Owner Read'),
                         'bucket-owner-full-control' => $l->t('Bucket Owner Full Control'),
-                    ]),
+                    ])
+                    ->setDefaultValue(''),
                 (new DefinitionParameter('hostname', $l->t('Hostname')))
                     ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
                 (new DefinitionParameter('port', $l->t('Port')))
