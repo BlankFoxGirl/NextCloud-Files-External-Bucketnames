@@ -1148,7 +1148,7 @@ MountConfigListView.prototype = _.extend({
 		storage.authMechanism = $tr.find('.selectAuthMechanism').val();
 
 		var classOptions = {};
-		var configuration = $tr.find('.configuration input');
+		var configuration = $tr.find('.configuration input, .configuration select');
 		var missingOptions = [];
 		$.each(configuration, function(index, input) {
 			var $input = $(input);
