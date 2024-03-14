@@ -211,6 +211,9 @@ class DefinitionParameter implements \JsonSerializable {
 			'type' => $this->getType(),
 			'tooltip' => $this->getTooltip(),
 		];
+		if ($this->getType() === self::VALUE_SELECT) {
+			$result['options'] = $this->getOptions();
+		}
 		$defaultValue = $this->getDefaultValue();
 		if ($defaultValue) {
 			$result['defaultValue'] = $defaultValue;
