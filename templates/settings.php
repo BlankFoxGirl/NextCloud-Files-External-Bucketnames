@@ -82,6 +82,24 @@ function writeParameterInput($parameter, $options, $classes = []) {
 			/>
 			<?php
 			break;
+		case DefinitionParameter::VALUE_SELECT; ?>
+			<?php if ($is_optional) {
+				$classes[] = 'optional';
+			} ?>
+			<select
+				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				data-parameter="<?php p($parameter->getName()); ?>"
+			>
+				<?php foreach ($parameter->getOptions() as $optionValue => $optionText): ?>
+					<option value="<?php p($optionValue); ?>"
+						<?php if ($optionValue === $value): ?> selected="selected"<?php endif; ?>
+					>
+						<?php p($optionText); ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+			<?php
+			break;
 		default: ?>
 			<?php if ($is_optional) {
 				$classes[] = 'optional';
