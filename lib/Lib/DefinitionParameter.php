@@ -147,6 +147,7 @@ class DefinitionParameter implements \JsonSerializable {
 
 	public function setOptions(array $optionsArray) {
 		$this->options = $optionsArray;
+		return $this;
 	}
 
 	/**
