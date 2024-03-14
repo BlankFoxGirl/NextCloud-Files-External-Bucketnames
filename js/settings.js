@@ -1099,12 +1099,12 @@ MountConfigListView.prototype = _.extend({
 		} else if (placeholder.type === MountConfigListView.ParameterTypes.HIDDEN) {
 			newElement = $('<input type="hidden" class="'+classes.join(' ')+'" data-parameter="'+parameter+'" />');
 		} else if (placeholder.type === MountConfigListView.ParameterTypes.SELECT) {
+			console.log(parameter, placeholder, $td, this);
 			newElement = $('<select class="'+classes.join(' ')+'" data-parameter="'+parameter+'"></select>');
 			$.each(placeholder.options, function(value, label) {
 				newElement.append($('<option value="'+value+'">'+label+'</option>'));
 			});
 		} else {
-			console.log(parameter, placeholder, $td);
 			newElement = $('<input type="text" class="'+classes.join(' ')+'" data-parameter="'+parameter+'" placeholder="'+ trimmedPlaceholder+'" />');
 		}
 
