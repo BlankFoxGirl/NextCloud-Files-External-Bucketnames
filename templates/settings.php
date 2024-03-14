@@ -45,6 +45,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 	}
 	$placeholder = $parameter->getText();
 	$is_optional = $parameter->isFlagSet(DefinitionParameter::FLAG_OPTIONAL);
+	$classes[] = $parameter->getType();
 
 	switch ($parameter->getType()) {
 		case DefinitionParameter::VALUE_PASSWORD: ?>
@@ -103,9 +104,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 		default: ?>
 			<?php if ($is_optional) {
 				$classes[] = 'optional';
-			}
-			$classes[] = $parameter->getType();
-			?>
+			} ?>
 			<input type="text"
 				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"

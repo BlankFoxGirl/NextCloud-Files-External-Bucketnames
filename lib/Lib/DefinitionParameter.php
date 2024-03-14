@@ -136,6 +136,8 @@ class DefinitionParameter implements \JsonSerializable {
 				return 'text';
 			case self::VALUE_PASSWORD:
 				return 'password';
+			case self::VALUE_SELECT:
+				return 'select';
 			default:
 				return 'unknown';
 		}
