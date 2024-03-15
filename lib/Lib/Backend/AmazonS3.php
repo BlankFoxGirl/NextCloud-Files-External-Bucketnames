@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Copyright (c) 2016, ownCloud, Inc.
  *
@@ -22,6 +23,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>
  *
  */
+
 namespace OCA\Files_External1\Lib\Backend;
 
 use OCA\Files_External1\Lib\Auth\AmazonS3\AccessKey;
@@ -30,38 +32,52 @@ use OCA\Files_External1\Lib\DefinitionParameter;
 use OCA\Files_External1\Lib\LegacyDependencyCheckPolyfill;
 use OCP\IL10N;
 
-class AmazonS3 extends Backend {
-	use LegacyDependencyCheckPolyfill;
+class AmazonS3 extends Backend
+{
+    use LegacyDependencyCheckPolyfill;
 
-	public function __construct(IL10N $l, AccessKey $legacyAuth) {
-		$this
-			->setIdentifier('amazons3')
-			->addIdentifierAlias('\OC\Files\Storage\AmazonS3') // legacy compat
-			->setStorageClass('\OCA\Files_External1\Lib\Storage\AmazonS3')
-			->setText($l->t('Amazon S3'))
-			->addParameters([
-				new DefinitionParameter('bucket', $l->t('Bucket')),
-				(new DefinitionParameter('name', $l->t('Name')))
-                                        ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
-				(new DefinitionParameter('hostname', $l->t('Hostname')))
-					->setFlag(DefinitionParameter::FLAG_OPTIONAL),
-				(new DefinitionParameter('port', $l->t('Port')))
-					->setFlag(DefinitionParameter::FLAG_OPTIONAL),
-				(new DefinitionParameter('region', $l->t('Region')))
-					->setFlag(DefinitionParameter::FLAG_OPTIONAL),
-				(new DefinitionParameter('storageClass', $l->t('Storage Class')))
-					->setFlag(DefinitionParameter::FLAG_OPTIONAL),
-				(new DefinitionParameter('use_ssl', $l->t('Enable SSL')))
-					->setType(DefinitionParameter::VALUE_BOOLEAN)
-					->setDefaultValue(true),
-				(new DefinitionParameter('use_path_style', $l->t('Enable Path Style')))
-					->setType(DefinitionParameter::VALUE_BOOLEAN),
-				(new DefinitionParameter('legacy_auth', $l->t('Legacy (v2) authentication')))
-					->setType(DefinitionParameter::VALUE_BOOLEAN),
-			])
-			->addAuthScheme(AccessKey::SCHEME_AMAZONS3_ACCESSKEY)
-			->addAuthScheme(AuthMechanism::SCHEME_NULL)
-			->setLegacyAuthMechanism($legacyAuth)
-		;
-	}
+    public function __construct(IL10N $l, AccessKey $legacyAuth)
+    {
+        $this
+            ->setIdentifier('amazons3')
+            ->addIdentifierAlias('\OC\Files\Storage\AmazonS3') // legacy compat
+            ->setStorageClass('\OCA\Files_External1\Lib\Storage\AmazonS3')
+            ->setText($l->t('Amazon S3'))
+            ->addParameters([
+                new DefinitionParameter('bucket', $l->t('Bucket')),
+                (new DefinitionParameter('name', $l->t('Name')))
+                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
+                (new DefinitionParameter('acl', $l->t('Acl')))
+                    ->setType(DefinitionParameter::VALUE_SELECT)
+                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL)
+                    ->setOptions([
+                        ''                          => $l->t('None'),
+                        'private'                   => $l->t('Private'),
+                        'public-read'               => $l->t('Public Read'),
+                        'public-read-write'         => $l->t('Public Read/Write'),
+                        'authenticated-read'        => $l->t('Authenticated Read'),
+                        'bucket-owner-read'         => $l->t('Bucket Owner Read'),
+                        'bucket-owner-full-control' => $l->t('Bucket Owner Full Control'),
+                    ])
+                    ->setDefaultValue(''),
+                (new DefinitionParameter('hostname', $l->t('Hostname')))
+                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
+                (new DefinitionParameter('port', $l->t('Port')))
+                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
+                (new DefinitionParameter('region', $l->t('Region')))
+                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
+                (new DefinitionParameter('storageClass', $l->t('Storage Class')))
+                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
+                (new DefinitionParameter('use_ssl', $l->t('Enable SSL')))
+                    ->setType(DefinitionParameter::VALUE_BOOLEAN)
+                    ->setDefaultValue(true),
+                (new DefinitionParameter('use_path_style', $l->t('Enable Path Style')))
+                    ->setType(DefinitionParameter::VALUE_BOOLEAN),
+                (new DefinitionParameter('legacy_auth', $l->t('Legacy (v2) authentication')))
+                    ->setType(DefinitionParameter::VALUE_BOOLEAN),
+            ])
+            ->addAuthScheme(AccessKey::SCHEME_AMAZONS3_ACCESSKEY)
+            ->addAuthScheme(AuthMechanism::SCHEME_NULL)
+            ->setLegacyAuthMechanism($legacyAuth);
+    }
 }

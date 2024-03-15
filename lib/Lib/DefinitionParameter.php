@@ -36,6 +36,7 @@ class DefinitionParameter implements \JsonSerializable {
 	public const VALUE_BOOLEAN = 1;
 	public const VALUE_PASSWORD = 2;
 	public const VALUE_HIDDEN = 3;
+	public const VALUE_SELECT = 4;
 
 	/** Flag constants */
 	public const FLAG_NONE = 0;
@@ -56,6 +57,9 @@ class DefinitionParameter implements \JsonSerializable {
 
 	/** @var int flags, see self::FLAG_* constants */
 	private int $flags = self::FLAG_NONE;
+
+	/** @var array options, used to populate a set of options in a select. */
+	private $options = [];
 
 	/** @var mixed */
 	private $defaultValue;
@@ -132,9 +136,20 @@ class DefinitionParameter implements \JsonSerializable {
 				return 'text';
 			case self::VALUE_PASSWORD:
 				return 'password';
+			case self::VALUE_SELECT:
+				return 'select';
 			default:
 				return 'unknown';
 		}
+	}
+
+	public function getOptions(): array {
+		return $this->options;
+	}
+
+	public function setOptions(array $optionsArray) {
+		$this->options = $optionsArray;
+		return $this;
 	}
 
 	/**
@@ -196,6 +211,9 @@ class DefinitionParameter implements \JsonSerializable {
 			'type' => $this->getType(),
 			'tooltip' => $this->getTooltip(),
 		];
+		if ($this->getType() === self::VALUE_SELECT) {
+			$result['options'] = $this->getOptions();
+		}
 		$defaultValue = $this->getDefaultValue();
 		if ($defaultValue) {
 			$result['defaultValue'] = $defaultValue;

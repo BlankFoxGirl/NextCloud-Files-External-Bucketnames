@@ -44,7 +44,7 @@ use Icewind\Streams\CallbackWrapper;
 use Icewind\Streams\IteratorDirectory;
 use OC\Files\Cache\CacheEntry;
 use OC\Files\ObjectStore\S3ConnectionTrait;
-use OC\Files\ObjectStore\S3ObjectTrait;
+use OCA\Files_External1\Lib\Trait\S3ObjectTrait;
 use OCP\Cache\CappedMemoryCache;
 use OCP\Constants;
 use OCP\Files\FileInfo;
@@ -80,7 +80,7 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 	public function __construct($parameters) {
 		parent::__construct($parameters);
 		$this->parseParams($parameters);
-		$this->id = 'amazon::external::' . md5($this->params['hostname'] . ':' . $this->params['name'] . ':' . $this->params['bucket'] . ':' . $this->params['key']);
+		$this->id = $this->getUniqueId();
 		$this->objectCache = new CappedMemoryCache();
 		$this->directoryCache = new CappedMemoryCache();
 		$this->filesCache = new CappedMemoryCache();
@@ -89,6 +89,24 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 		$cacheFactory = Server::get(ICacheFactory::class);
 		$this->memCache = $cacheFactory->createLocal('s3-external');
 		$this->logger = Server::get(LoggerInterface::class);
+	}
+
+	private function getSafeParam($key, $default = null) {
+		return $this->params[$key] ?? $default;
+	}
+
+	private function getUniqueId(): string {
+		return 'amazon::external::' . md5($this->getSafeParam('hostname') . ':' . $this->getSafeParam('name') . ':' . $this->getSafeParam('bucket') . ':' . $this->getSafeParam('key', 'no-key'));
+	}
+
+	private function getPayloadWithACLIfSet(array $payload): array {
+		if (isset($this->params['acl'])) {
+			$payload['ACL'] = $this->params['acl'];
+		} else {
+			$payload['ACL'] = 'private'; // Default to private.
+		}
+
+		return $payload;
 	}
 
 	/**
@@ -248,12 +266,12 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 		}
 
 		try {
-			$this->getConnection()->putObject([
+			$this->getConnection()->putObject($this->getPayloadWithACLIfSet([
 				'Bucket' => $this->bucket,
 				'Key' => $path . '/',
 				'Body' => '',
 				'ContentType' => FileInfo::MIMETYPE_FOLDER
-			]);
+			]));
 			$this->testTimeout();
 		} catch (S3Exception $e) {
 			$this->logger->error($e->getMessage(), [
@@ -552,14 +570,14 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 			}
 
 			$mimeType = $this->mimeDetector->detectPath($path);
-			$this->getConnection()->putObject([
+			$this->getConnection()->putObject($this->getPayloadWithACLIfSet([
 				'Bucket' => $this->bucket,
 				'Key' => $this->cleanKey($path),
 				'Metadata' => $metadata,
 				'Body' => '',
 				'ContentType' => $mimeType,
 				'MetadataDirective' => 'REPLACE',
-			]);
+			]));
 			$this->testTimeout();
 		} catch (S3Exception $e) {
 			$this->logger->error($e->getMessage(), [
@@ -579,9 +597,9 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 
 		if ($isFile === true || $this->is_file($source)) {
 			try {
-				$this->copyObject($source, $target, [
+				$this->copyObject($source, $target, $this->getPayloadWithACLIfSet([
 					'StorageClass' => $this->storageClass,
-				]);
+				]));
 				$this->testTimeout();
 			} catch (S3Exception $e) {
 				$this->logger->error($e->getMessage(), [

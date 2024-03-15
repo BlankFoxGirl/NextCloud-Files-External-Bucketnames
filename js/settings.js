@@ -610,7 +610,8 @@ MountConfigListView.ParameterTypes = {
 	TEXT: 0,
 	BOOLEAN: 1,
 	PASSWORD: 2,
-	HIDDEN: 3
+	HIDDEN: 3,
+	SELECT: 4
 };
 
 /**
@@ -1097,6 +1098,12 @@ MountConfigListView.prototype = _.extend({
 			newElement = $('<div><label><input type="checkbox" id="'+checkboxId+'" class="'+classes.join(' ')+'" data-parameter="'+parameter+'" />'+ trimmedPlaceholder+'</label></div>');
 		} else if (placeholder.type === MountConfigListView.ParameterTypes.HIDDEN) {
 			newElement = $('<input type="hidden" class="'+classes.join(' ')+'" data-parameter="'+parameter+'" />');
+		} else if (placeholder.type === MountConfigListView.ParameterTypes.SELECT) {
+			console.log(parameter, placeholder, $td, this);
+			newElement = $('<select class="'+classes.join(' ')+'" data-parameter="'+parameter+'"></select>');
+			$.each(placeholder.options, function(value, label) {
+				newElement.append($('<option value="'+value+'">'+label+'</option>'));
+			});
 		} else {
 			newElement = $('<input type="text" class="'+classes.join(' ')+'" data-parameter="'+parameter+'" placeholder="'+ trimmedPlaceholder+'" />');
 		}
@@ -1141,7 +1148,7 @@ MountConfigListView.prototype = _.extend({
 		storage.authMechanism = $tr.find('.selectAuthMechanism').val();
 
 		var classOptions = {};
-		var configuration = $tr.find('.configuration input');
+		var configuration = $tr.find('.configuration input, .configuration select');
 		var missingOptions = [];
 		$.each(configuration, function(index, input) {
 			var $input = $(input);

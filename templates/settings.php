@@ -45,6 +45,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 	}
 	$placeholder = $parameter->getText();
 	$is_optional = $parameter->isFlagSet(DefinitionParameter::FLAG_OPTIONAL);
+	$classes[] = $parameter->getType();
 
 	switch ($parameter->getType()) {
 		case DefinitionParameter::VALUE_PASSWORD: ?>
@@ -52,7 +53,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 				$classes[] = 'optional';
 			} ?>
 			<input type="password"
-				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="<?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 				value="<?php p($value); ?>"
 				placeholder="<?php p($placeholder); ?>"
@@ -65,7 +66,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 			<label>
 			<input type="checkbox"
 				id="<?php p($checkboxId); ?>"
-				<?php if (!empty($classes)): ?> class="checkbox <?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="checkbox <?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 				<?php if ($value === true): ?> checked="checked"<?php endif; ?>
 			/>
@@ -76,10 +77,28 @@ function writeParameterInput($parameter, $options, $classes = []) {
 			break;
 		case DefinitionParameter::VALUE_HIDDEN: ?>
 			<input type="hidden"
-				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="<?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 				value="<?php p($value); ?>"
 			/>
+			<?php
+			break;
+		case DefinitionParameter::VALUE_SELECT; ?>
+			<?php if ($is_optional) {
+				$classes[] = 'optional';
+			} ?>
+			<select
+				<?php if (!empty($classes)): ?> class="<?php implode(' ', $classes); ?>"<?php endif; ?>
+				data-parameter="<?php p($parameter->getName()); ?>"
+			>
+				<?php foreach ($parameter->getOptions() as $optionValue => $optionText): ?>
+					<option value="<?php p($optionValue); ?>"
+						<?php if ($optionValue === $value): ?> selected="selected"<?php endif; ?>
+					>
+						<?php p($optionText); ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
 			<?php
 			break;
 		default: ?>
@@ -87,7 +106,7 @@ function writeParameterInput($parameter, $options, $classes = []) {
 				$classes[] = 'optional';
 			} ?>
 			<input type="text"
-				<?php if (!empty($classes)): ?> class="<?php p(implode(' ', $classes)); ?>"<?php endif; ?>
+				<?php if (!empty($classes)): ?> class="<?php implode(' ', $classes); ?>"<?php endif; ?>
 				data-parameter="<?php p($parameter->getName()); ?>"
 				value="<?php p($value); ?>"
 				placeholder="<?php p($placeholder); ?>"

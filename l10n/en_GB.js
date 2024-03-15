@@ -155,6 +155,13 @@ OC.L10N.register(
     "Credentials saving failed" : "Credentials saving failed",
     "Credentials required" : "Credentials required",
     "Disabling it will allow to use a case insentive file system, but comes with a performance penalty" : "Disabling it will allow to use a case insentive file system, but comes with a performance penalty",
-    "Name" : "Name"
+    "Name" : "Name",
+    "Acl" : "ACL",
+    "Private" : "Private",
+    "Public Read": "Public Read",
+    "Public Read/Write": "Public Read/Write",
+    "Authenticated Read": "Authenticated Read",
+    "Bucket Owner Read": "Bucket Owner Read",
+    "Bucket Owner Full Control": "Bucket Owner Full Control"
 },
 "nplurals=2; plural=(n != 1);");

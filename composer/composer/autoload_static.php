@@ -100,6 +100,7 @@ class ComposerStaticInitFiles_External
         'OCA\\Files_External1\\Lib\\StorageConfig' => __DIR__ . '/..' . '/../lib/Lib/StorageConfig.php',
         'OCA\\Files_External1\\Lib\\StorageModifierTrait' => __DIR__ . '/..' . '/../lib/Lib/StorageModifierTrait.php',
         'OCA\\Files_External1\\Lib\\Storage\\AmazonS3' => __DIR__ . '/..' . '/../lib/Lib/Storage/AmazonS3.php',
+        'OCA\\Files_External1\\Lib\\Trait\\S3ObjectTrait' => __DIR__ . '/..' . '/../lib/Lib/Trait/S3ObjectTrait.php',
         'OCA\\Files_External1\\Lib\\Storage\\FTP' => __DIR__ . '/..' . '/../lib/Lib/Storage/FTP.php',
         'OCA\\Files_External1\\Lib\\Storage\\FtpConnection' => __DIR__ . '/..' . '/../lib/Lib/Storage/FtpConnection.php',
         'OCA\\Files_External1\\Lib\\Storage\\OwnCloud' => __DIR__ . '/..' . '/../lib/Lib/Storage/OwnCloud.php',
