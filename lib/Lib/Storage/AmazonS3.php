@@ -264,6 +264,13 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 		}
 
 		try {
+			$this->logger->debug('Calling put object' . $path, $this->getPayloadWithACLIfSet([
+				'Bucket' => $this->bucket,
+				'Key' => $path . '/',
+				'Body' => '',
+				'ContentType' => FileInfo::MIMETYPE_FOLDER
+			]));
+
 			$this->getConnection()->putObject($this->getPayloadWithACLIfSet([
 				'Bucket' => $this->bucket,
 				'Key' => $path . '/',
@@ -568,6 +575,15 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 			}
 
 			$mimeType = $this->mimeDetector->detectPath($path);
+			$this->logger->debug('Calling put object' . $path, $this->getPayloadWithACLIfSet([
+				'Bucket' => $this->bucket,
+				'Key' => $this->cleanKey($path),
+				'Metadata' => $metadata,
+				'Body' => '',
+				'ContentType' => $mimeType,
+				'MetadataDirective' => 'REPLACE',
+			]));
+
 			$this->getConnection()->putObject($this->getPayloadWithACLIfSet([
 				'Bucket' => $this->bucket,
 				'Key' => $this->cleanKey($path),
