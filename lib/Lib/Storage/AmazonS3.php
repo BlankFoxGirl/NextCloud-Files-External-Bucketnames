@@ -100,9 +100,10 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 	}
 
 	private function getPayloadWithACLIfSet(array $payload): array {
-		$this->logger->info('AmazonS3', $this->params);
 		if (isset($this->params['acl'])) {
 			$payload['ACL'] = $this->params['acl'];
+		} else {
+			$payload['ACL'] = 'private'; // Default to private.
 		}
 
 		return $payload;
@@ -265,13 +266,6 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 		}
 
 		try {
-			$this->logger->info('Calling put object' . $path, $this->getPayloadWithACLIfSet([
-				'Bucket' => $this->bucket,
-				'Key' => $path . '/',
-				'Body' => '',
-				'ContentType' => FileInfo::MIMETYPE_FOLDER
-			]));
-
 			$this->getConnection()->putObject($this->getPayloadWithACLIfSet([
 				'Bucket' => $this->bucket,
 				'Key' => $path . '/',
@@ -576,15 +570,6 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 			}
 
 			$mimeType = $this->mimeDetector->detectPath($path);
-			$this->logger->info('Calling put object' . $path, $this->getPayloadWithACLIfSet([
-				'Bucket' => $this->bucket,
-				'Key' => $this->cleanKey($path),
-				'Metadata' => $metadata,
-				'Body' => '',
-				'ContentType' => $mimeType,
-				'MetadataDirective' => 'REPLACE',
-			]));
-
 			$this->getConnection()->putObject($this->getPayloadWithACLIfSet([
 				'Bucket' => $this->bucket,
 				'Key' => $this->cleanKey($path),
