@@ -44,7 +44,7 @@ use Icewind\Streams\CallbackWrapper;
 use Icewind\Streams\IteratorDirectory;
 use OC\Files\Cache\CacheEntry;
 use OC\Files\ObjectStore\S3ConnectionTrait;
-use OC\Files\ObjectStore\S3ObjectTrait;
+use OCA\Files_External1\Lib\Trait\S3ObjectTrait;
 use OCP\Cache\CappedMemoryCache;
 use OCP\Constants;
 use OCP\Files\FileInfo;
@@ -100,6 +100,7 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 	}
 
 	private function getPayloadWithACLIfSet(array $payload): array {
+		$this->logger->info('AmazonS3', $this->params);
 		if (isset($this->params['acl'])) {
 			$payload['ACL'] = $this->params['acl'];
 		}
@@ -264,7 +265,7 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 		}
 
 		try {
-			$this->logger->debug('Calling put object' . $path, $this->getPayloadWithACLIfSet([
+			$this->logger->info('Calling put object' . $path, $this->getPayloadWithACLIfSet([
 				'Bucket' => $this->bucket,
 				'Key' => $path . '/',
 				'Body' => '',
@@ -575,7 +576,7 @@ class AmazonS3 extends \OC\Files\Storage\Common {
 			}
 
 			$mimeType = $this->mimeDetector->detectPath($path);
-			$this->logger->debug('Calling put object' . $path, $this->getPayloadWithACLIfSet([
+			$this->logger->info('Calling put object' . $path, $this->getPayloadWithACLIfSet([
 				'Bucket' => $this->bucket,
 				'Key' => $this->cleanKey($path),
 				'Metadata' => $metadata,
