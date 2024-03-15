@@ -36,6 +36,18 @@ class AmazonS3 extends Backend
 {
     use LegacyDependencyCheckPolyfill;
 
+    /// This is temporary. We should be using a proper UUID library.
+    private function generateUUIDv4() {
+        $source = bin2hex(random_bytes(16));
+        return sprintf('%s-%s-%s-%s-%s',
+            substr($source, 0, 8),
+            substr($source, 8, 4),
+            substr($source, 12, 4),
+            substr($source, 16, 4),
+            substr($source, 20, 12)
+        );
+    }
+
     public function __construct(IL10N $l, AccessKey $legacyAuth)
     {
         $this
@@ -46,7 +58,8 @@ class AmazonS3 extends Backend
             ->addParameters([
                 new DefinitionParameter('bucket', $l->t('Bucket')),
                 (new DefinitionParameter('name', $l->t('Name')))
-                    ->setFlag(DefinitionParameter::FLAG_OPTIONAL),
+                    ->setType(DefinitionParameter::VALUE_HIDDEN)
+                    ->setDefaultValue($this.generateUUIDv4()),
                 (new DefinitionParameter('acl', $l->t('Acl')))
                     ->setType(DefinitionParameter::VALUE_SELECT)
                     ->setFlag(DefinitionParameter::FLAG_OPTIONAL)
