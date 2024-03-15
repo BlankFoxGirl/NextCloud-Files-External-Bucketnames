@@ -85,6 +85,7 @@ return array(
     'OCA\\Files_External1\\Lib\\StorageConfig' => $baseDir . '/../lib/Lib/StorageConfig.php',
     'OCA\\Files_External1\\Lib\\StorageModifierTrait' => $baseDir . '/../lib/Lib/StorageModifierTrait.php',
     'OCA\\Files_External1\\Lib\\Storage\\AmazonS3' => $baseDir . '/../lib/Lib/Storage/AmazonS3.php',
+    'OCA\\Files_External1\\Lib\\Trait\\AmazonS3' => $baseDir . '/../lib/Lib/Trait/S3ObjectTrait.php',
     'OCA\\Files_External1\\Lib\\Storage\\FTP' => $baseDir . '/../lib/Lib/Storage/FTP.php',
     'OCA\\Files_External1\\Lib\\Storage\\FtpConnection' => $baseDir . '/../lib/Lib/Storage/FtpConnection.php',
     'OCA\\Files_External1\\Lib\\Storage\\OwnCloud' => $baseDir . '/../lib/Lib/Storage/OwnCloud.php',
